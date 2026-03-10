@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	// Number of services. Labels: host.
+	// Number of services. Labels: host, service, handler, listener.
 	MetricServicesGauge metrics.MetricName = "gost_services"
 	// Total service requests. Labels: host, service, client.
 	MetricServiceRequestsCounter metrics.MetricName = "gost_service_requests_total"

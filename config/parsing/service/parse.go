@@ -339,6 +339,8 @@ func ParseService(cfg *config.ServiceConfig) (service.Service, error) {
 		xservice.StatsOption(pStats),
 		xservice.ObserverOption(registry.ObserverRegistry().Get(cfg.Observer)),
 		xservice.ObserverPeriodOption(observerPeriod),
+		xservice.HandlerTypeOption(cfg.Handler.Type),
+		xservice.ListenerTypeOption(cfg.Listener.Type),
 		xservice.LoggerOption(serviceLogger),
 	)
 

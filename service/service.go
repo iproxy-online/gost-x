@@ -38,6 +38,8 @@ type options struct {
 	stats          stats.Stats
 	observer       observer.Observer
 	observerPeriod time.Duration
+	handlerType    string
+	listenerType   string
 	logger         logger.Logger
 }
 
@@ -94,6 +96,18 @@ func ObserverOption(observer observer.Observer) Option {
 func ObserverPeriodOption(period time.Duration) Option {
 	return func(opts *options) {
 		opts.observerPeriod = period
+	}
+}
+
+func HandlerTypeOption(handlerType string) Option {
+	return func(opts *options) {
+		opts.handlerType = handlerType
+	}
+}
+
+func ListenerTypeOption(listenerType string) Option {
+	return func(opts *options) {
+		opts.listenerType = listenerType
 	}
 }
 
@@ -156,7 +170,11 @@ func (s *defaultService) Serve() error {
 
 	if v := xmetrics.GetGauge(
 		xmetrics.MetricServicesGauge,
-		metrics.Labels{}); v != nil {
+		metrics.Labels{
+			"service":  s.name,
+			"handler":  s.options.handlerType,
+			"listener": s.options.listenerType,
+		}); v != nil {
 		v.Inc()
 		defer v.Dec()
 	}
