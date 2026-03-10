@@ -171,7 +171,6 @@ func (s *defaultService) Serve() error {
 	if v := xmetrics.GetGauge(
 		xmetrics.MetricServicesGauge,
 		metrics.Labels{
-			"service":  s.name,
 			"handler":  s.options.handlerType,
 			"listener": s.options.listenerType,
 		}); v != nil {

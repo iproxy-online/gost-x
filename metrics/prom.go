@@ -24,7 +24,7 @@ func NewMetrics() metrics.Metrics {
 					Name: string(MetricServicesGauge),
 					Help: "Current number of services",
 				},
-				[]string{"host", "service", "handler", "listener"}),
+				[]string{"host", "handler", "listener"}),
 			MetricServiceRequestsInFlightGauge: prometheus.NewGaugeVec(
 				prometheus.GaugeOpts{
 					Name: string(MetricServiceRequestsInFlightGauge),
